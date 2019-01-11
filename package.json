@@ -1,0 +1,24 @@
+{
+  "name": "world-cuisine-recipe",
+  "version": "1.0.0",
+  "description": "Final Project - Group of 2",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/esengupta/World-Cuisine-Recipe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/esengupta/World-Cuisine-Recipe/issues"
+  },
+  "homepage": "https://github.com/esengupta/World-Cuisine-Recipe#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.4.3"
+  }
+}
