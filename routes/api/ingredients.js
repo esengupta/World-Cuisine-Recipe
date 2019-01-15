@@ -16,4 +16,10 @@ router
   .put(ingredientsController.update)
   .delete(ingredientsController.remove);
 
+
+  // Matches with "/api/ingredients/:id"
+
+  router.route('/username/:username').get(ingredientsController.findAll);
+
+
 module.exports = router;
