@@ -41,9 +41,20 @@ module.exports = {
   },
 
   // update book information ("/api/book/:id" => PUT)
-  update: function (req, res) {
+  updateById: function (req, res) {
     db.Ingredient
       .findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => 
+        // console.log(err);
+        res.status(422).json(err)
+      );
+  },
+
+  // update book information ("/api/book/:id" => PUT)
+  updateMany: function (req, res) {
+    db.Ingredient
+      .findOneAndUpdate({ filter }, ingUpdate)
       .then(dbModel => res.json(dbModel))
       .catch(err => 
         // console.log(err);
