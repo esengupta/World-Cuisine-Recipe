@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 // Matches with "/api/recipes/search"
 router.get("/", (req, res) => {
-  console.log("this hit")
+  // console.log("this hit")
   axios
     .get("http://www.recipepuppy.com/api/", { params: req.query })
     .then(({ data: { results } }) => res.json(results))

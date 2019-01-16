@@ -3,13 +3,13 @@ import {Link, NavLink} from 'react-router-dom';
 
 const Navbar = props => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand navbar-light bg-light">
       <Link 
         className="navbar-brand" 
         to="/">
-        Recipe Search
+        World Cuisine Recipes
       </Link>
-      <ul className="nav">
+      <ul className="nav ml-auto">
         <li className="nav-item">
           <NavLink 
             className={`nav-link text-info ${window.location.pathname === "/" ? "text-danger" : ""}`} 
