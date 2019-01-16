@@ -1,11 +1,11 @@
 /* Mongo Database
 * - this is where we set up our connection to the mongo database
 */
-const mongoose = require('mongoose');
 // const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-let MONGO_URL;
-const MONGO_LOCAL_URL = 'mongodb://localhost/recipelist';
+// // const mongoose = require('mongoose');
+// mongoose.Promise = global.Promise;
+// let MONGO_URL;
+// const MONGO_LOCAL_URL = 'mongodb://localhost/recipelist';
 
 // Connect to the Mongo DB
 // mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
@@ -36,4 +36,4 @@ const MONGO_LOCAL_URL = 'mongodb://localhost/recipelist';
 //   });
 // });
 
-module.exports = db;
+// module.exports = db;
