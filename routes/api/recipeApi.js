@@ -5,15 +5,15 @@ const axios = require("axios");
 // Matches with "/api/recipes"
 router
   // .route("/")
+// .post(recipesController.create);
   .get("/", (req,res) => {
-    console.log('this is called too')
-  // .post(recipesController.create);
-
-// Matches with "/api/book/:id"
-axios
+    console.log('this is called too');
+  // Matches with "/api/book/:id"
   // .route("/:id")
-  .get("http://www.recipepuppy.com/api/", {params: req.query})
-  .then(({data: { result }}) => res.json(results))
+  // console.log(`http://www.recipepuppy.com/api/?i=${req.query.ingredient}`)
+  axios
+  .get(`http://www.recipepuppy.com/api/?i=${req.query.ingredient}`) //, {params: req.query})
+  .then((results) => res.json(results.data.results))
   .catch(err => 
         // console.log(err);
         res.status(422).json(err));
