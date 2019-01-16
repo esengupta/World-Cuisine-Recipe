@@ -3,6 +3,7 @@ import React, { Component } from "react";
 
 // import API from "../utils/API"
 import SearchForm from "../components/SearchForm";
+import Jumbotron from "../components/Jumbotron";
 
 class Favorites extends Component {
   state = {
@@ -18,10 +19,14 @@ class Favorites extends Component {
 
   // }
 
-  
+
   render() {
     return (
       <div>
+        <Jumbotron
+          pagename="Recipe Favorites Page"
+          description="The recipes that are your favoriates"
+        />
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 col-md-3">
