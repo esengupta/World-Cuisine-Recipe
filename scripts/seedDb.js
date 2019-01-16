@@ -5,81 +5,81 @@ const db = require("../models");
 
 mongoose.connect(
   process.env.MONGODB_URI ||
-  "mongodb://localhost/reactreadinglist"
+  "mongodb://localhost/recipelist"
 );
 
 const ingredientSeed = [
   {
     name: "Salt",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Sugar",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Eggs",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Bread",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Oregano",
-    selected: ""
+    selected:"false"
   },
   {
     name: "Tuna",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Ground-Turkey",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Oatmeal",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Butter",
-    selected: ""
+    selected:"false"
   },
   {
     name: "Flour",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Peas",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Tomatoes",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Crushed Garlic",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Cream of Mushroom Soup",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Spaghetti Noodles",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Chicken",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Mixed Vegetable",
-    selected: ""
+    selected: "false"
   },
   {
     name: "Pepper",
-    selected: ""
+    selected: "false"
   },
   
 ];
