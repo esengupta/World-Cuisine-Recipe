@@ -24,8 +24,8 @@ class Favorites extends Component {
     return (
       <div>
         <Jumbotron
-          pagename="Recipe Search Page"
-          description="Search for recipes by ingredients"
+          pagename="Recipe Favorites Page"
+          description="The recipes that are your favoriates"
         />
         <div className="container-fluid">
           <div className="row">
