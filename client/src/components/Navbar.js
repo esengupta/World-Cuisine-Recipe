@@ -24,6 +24,13 @@ const Navbar = props => {
             View Favorite Recipes
           </NavLink>
         </li>
+        <li className="nav-item">
+          <NavLink 
+            className={`nav-link text-info`} 
+            to="/user">
+            Login
+          </NavLink>
+        </li>
       </ul>
     </nav>
   )
