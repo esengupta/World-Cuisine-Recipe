@@ -51,7 +51,7 @@ register: (req, res) => {
       },
   authenticate: (req, res) => {
         console.log('POST to /login');
-        const user = JSON.parse(JSON.stringify(req.user)); // hack
+        const user = JSON.parse(JSON.stringify(req.user)); 
         const cleanUser = Object.assign({}, user);
         if (cleanUser) {
               console.log(`Deleting ${cleanUser.password}`);

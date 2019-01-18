@@ -2,7 +2,7 @@
 module.exports = {
   Recipe: require("./recipe"),
   Ingredient: require("./ingredient"),
-  // User: require("./user"),
+  User: require("./user"),
   Faves: require("./faves"),
-  Recipe: require("./recipe"),
+  // Recipe: require("./recipe"),
 };

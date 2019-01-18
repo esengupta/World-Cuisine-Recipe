@@ -10,18 +10,18 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  console.log('Deserialize called');
-  db.User.findOne(
-    { _id: id },
-   'firstName lastName username',
-   (err, user) => {
-      console.log('Deserialize user called');
-      console.log(user);
-      console.log('--------------');
-      done(null, user);
-   }
-  );
-  });
+      console.log('Deserialize called');
+      db.User.findOne(
+          { _id: id },
+        'firstName lastName username',
+        (err, user) => {
+          console.log('Deserialize user called');
+          console.log(user);
+          console.log('--------------');
+          done(null, user);
+        }
+      );
+});
 
   // Register Strategies
 passport.use(LocalStrategy);
