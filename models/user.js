@@ -5,13 +5,13 @@ mongoose.promise = Promise;
 
 // Define userSchema
 const userSchema = new Schema({
-firstName: { type: String, unique: false },
-lastName: { type: String, unique: false },
-username: { type: String, unique: true, required: false },
-password: { type: String, unique: false, required: false },
-joinIngredient : [{type: Schema.Types.ObjectId, ref: 'Ingredient' }], //trying to get user view to work
-joinRecipe : [{type: Schema.Types.ObjectId, ref: 'Recipe' }], //trying to get user view to work
-joinFaves : [{type: Schema.Types.ObjectId, ref: 'Faves' }] //trying to get user view to work
+  firstName: { type: String, unique: false },
+  lastName: { type: String, unique: false },
+  username: { type: String, unique: true, required: false },
+  password: { type: String, unique: false, required: false },
+  joinIngredient : [{type: Schema.Types.ObjectId, ref: 'Ingredient' }], //trying to get user view to work
+  joinRecipe : [{type: Schema.Types.ObjectId, ref: 'Recipe' }], //trying to get user view to work
+  joinFaves : [{type: Schema.Types.ObjectId, ref: 'Faves' }] //trying to get user view to work
 });
 
 // Define schema methods
@@ -38,4 +38,5 @@ userSchema.pre('save', function(next) {
 
   // Create reference to User & export
 const User = mongoose.model('User', userSchema);
+
 module.exports = User;

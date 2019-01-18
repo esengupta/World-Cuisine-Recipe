@@ -13,7 +13,7 @@ router
 router
   .route("/:id")
   .get(ingredientsController.findById)
-  // .put(ingredientsController.update)
+  .put(ingredientsController.updateById)
   .delete(ingredientsController.remove);
 
 

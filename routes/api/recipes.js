@@ -8,7 +8,6 @@ router
   .get(recipesController.findAll)
   // .post(recipesController.create);
 
-// Matches with "/api/book/:id"
 router
   .route("/:id")
   .get(recipesController.findById)

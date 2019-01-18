@@ -8,18 +8,16 @@ router
 // .post(recipesController.create);
   .get("/", (req,res) => {
     console.log('this is called too');
-  // Matches with "/api/book/:id"
+  
   // .route("/:id")
   // console.log(`http://www.recipepuppy.com/api/?i=${req.query.ingredient}`)
-  axios
+axios
   .get(`http://www.recipepuppy.com/api/?i=${req.query.ingredient}`) //, {params: req.query})
   .then((results) => res.json(results.data.results))
   .catch(err => 
         // console.log(err);
         res.status(422).json(err));
 
-  // .put(recipesController.update)
-  // .delete(recipesController.remove);
   });
 
 module.exports = router;
