@@ -21,12 +21,14 @@ const Card = (props) => {
       <div className="card-footer">
         <a href={props.url} className="btn btn-primary btn-sm mr-3">View Recipe</a>
         {props.handleSave ?
-        (
-        <button className="btn btn-primary btn-sm" onClick={() => props.handleSave(props.uri)}>Save</button>
-        )
-        :
-        (<p> </p>)
-      }
+          (
+            <button className="btn btn-primary btn-sm" onClick={() => props.handleSave(props.uri)}>Save</button>
+          )
+          :
+          (
+            <button className="btn btn-primary btn-sm" onClick={() => props.handleDelete(props.uri)}>Remove</button>
+          )
+        }
       </div>
     </div>)
 }

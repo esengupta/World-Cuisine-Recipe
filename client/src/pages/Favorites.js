@@ -3,7 +3,7 @@ import React, { Component } from "react";
 
 import API from "../utils/API"
 import Card from "../components/Card";
-import SearchForm from "../components/SearchForm";
+// import SearchForm from "../components/SearchForm";
 import Jumbotron from "../components/Jumbotron";
 
 class Favorites extends Component {
@@ -11,7 +11,7 @@ class Favorites extends Component {
     recipes: []
   };
 
-  componentDidMount(){
+  componentDidMount() {
     this.loadFavorites();
   };
 
@@ -32,6 +32,20 @@ class Favorites extends Component {
       });
   }
 
+  handleDelete = uri => {
+    console.log("delete Fave");
+    console.log(uri);
+    API
+      .deleteRecipe(uri)
+      .then(({ data }) => {
+        console.log(data);
+        this.loadFavorites();
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  }
+
   render() {
     return (
       <div>
@@ -47,13 +61,13 @@ class Favorites extends Component {
                   <Card
                     key={recipe.uri}
                     uri={recipe.uri}
-                    title={recipe.label}
+                    title={recipe.title}
                     url={recipe.url}
                     ingredients={recipe.ingredients.join(", ")}
                     picture={recipe.image}
                     dietLabels={recipe.dietLabels.join(", ")}
                     healthLabels={recipe.healthLabels.join(", ")}
-                    handleSave={this.handleSave}
+                    handleDelete={this.handleDelete}
                   />
                 ))}
               </div>

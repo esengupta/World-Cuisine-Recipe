@@ -5,25 +5,25 @@ const db = require("../models");
 
 module.exports = {
   // find all books ("/api/book" => GET)
-  findAll: function(req, res) {
+  findAll: function (req, res) {
     // /api/book?title=harry+potter
     // req.query => {title: "harry potter"}
     console.log('db.findall');
     console.log(req.query.username);
     db.Recipe
-      .find({ username: req.query.username})
-      .sort({date: -1})
+      .find({ username: req.query.username })
+      .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-     
+
   },
-  
+
   // find a book by id ("/api/book/:id")
   findById: function (req, res) {
     db.Recipe
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
-      .catch(err => 
+      .catch(err =>
         // console.log(err);
         res.status(422).json(err)
       );
@@ -36,7 +36,7 @@ module.exports = {
     db.Recipe
       .create(req.body)
       .then(dbModel => res.json(dbModel))
-      .catch(err => 
+      .catch(err =>
         // console.log(err);
         res.status(422).json(err)
       );
@@ -47,21 +47,22 @@ module.exports = {
     db.Recipe
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
-      .catch(err => 
+      .catch(err =>
         // console.log(err);
         res.status(422).json(err)
       );
   },
 
-  // to delete a book from the reading list ("/api/book/:id" => DELETE)
+  // to delete a book from the reading list ("/api/recipe/:id" => DELETE)
   remove: function (req, res) {
+    console.log('remove function')
+    console.log(req.params);
     db.Recipe
-      .findById({ _id: req.params.id })
-      .then(dbModel => dbModel.remove())
+      .findOneAndDelete({ uri: req.params.id })
       .then(dbModel => res.json(dbModel))
-      .catch(err => 
-        // console.log(err);
+      .catch(err => {
+        console.log(err);
         res.status(422).json(err)
-      );
+      });
   }
 };

@@ -100,11 +100,11 @@ class Search extends Component {
         saveRecipe.username='Bruce';
         saveRecipe.title=item.recipe.label;
         saveRecipe.ingredients=item.recipe.ingredientLines;
-        saveRecipe.uri=item.recipe.uri;
+        saveRecipe.uri=item.recipe.uri.substring(item.recipe.uri.indexOf("#")+1);
         saveRecipe.url=item.recipe.url;
         saveRecipe.image=item.recipe.image;
-        saveRecipe.dietLables=item.recipe.dietLabels;
-        saveRecipe.healthLables=item.recipe.healthLabels;
+        saveRecipe.dietLabels=item.recipe.dietLabels;
+        saveRecipe.healthLabels=item.recipe.healthLabels;
       }
     });
     console.log(saveRecipe);
