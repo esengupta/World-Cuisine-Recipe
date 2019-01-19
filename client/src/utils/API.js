@@ -62,6 +62,15 @@ export default {
         params: query
       })
     }
-  }
+  },
+
+  saveRecipe: function(recipeData) {
+    return axios.post('/api/recipe', recipeData)
+  },
+  getFavorites: function(user) {
+    console.log('getFavorites');
+    console.log(user);
+    return axios.get(`/api/recipe?username=${user}`)
+  },
 
 }

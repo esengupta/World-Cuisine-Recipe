@@ -8,9 +8,10 @@ module.exports = {
   findAll: function(req, res) {
     // /api/book?title=harry+potter
     // req.query => {title: "harry potter"}
-    console.log(req.params.username)
+    console.log('db.findall');
+    console.log(req.query.username);
     db.Recipe
-      .find({ usename: req.params.username})
+      .find({ username: req.query.username})
       .sort({date: -1})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

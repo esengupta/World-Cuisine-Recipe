@@ -92,6 +92,32 @@ class Search extends Component {
       });
   }
 
+  handleSave = uri => {
+    console.log("save Fave");
+    let saveRecipe = {};
+    this.state.recipes.forEach(item => {
+      if (item.recipe.uri === uri) {
+        saveRecipe.username='Bruce';
+        saveRecipe.title=item.recipe.label;
+        saveRecipe.ingredients=item.recipe.ingredientLines;
+        saveRecipe.uri=item.recipe.uri;
+        saveRecipe.url=item.recipe.url;
+        saveRecipe.image=item.recipe.image;
+        saveRecipe.dietLables=item.recipe.dietLabels;
+        saveRecipe.healthLables=item.recipe.healthLabels;
+      }
+    });
+    console.log(saveRecipe);
+    API
+      .saveRecipe(saveRecipe)
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err)
+      });
+  }
+
   render() {
     return (
       <div>
@@ -129,12 +155,14 @@ class Search extends Component {
                   {this.state.recipes.map(recipe => (
                     <Card
                       key={recipe.recipe.uri}
+                      uri={recipe.recipe.uri}
                       title={recipe.recipe.label}
                       url={recipe.recipe.url}
                       ingredients={recipe.recipe.ingredientLines.join(", ")}
                       picture={recipe.recipe.image}
                       dietLabels={recipe.recipe.dietLabels.join(", ")}
                       healthLabels={recipe.recipe.healthLabels.join(", ")}
+                      handleSave={this.handleSave}
                     />
                   ))}
                 </div>

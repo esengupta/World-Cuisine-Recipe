@@ -26,7 +26,7 @@ const FILTERS = {
     'paleo',
     'peanit-free',
     'pescatarian',
-    'Pork-free',
+    'pork-free',
     'red-meat-free',
     'sesame-free',
     'shellfish-free',

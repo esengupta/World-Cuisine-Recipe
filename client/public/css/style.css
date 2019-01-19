@@ -1,0 +1,19 @@
+body {
+  background-color: antiquewhite;
+}
+
+.jumbotron {
+  background-image: url("../images/recipe-book.jpg");
+  background-size: cover;
+}
+
+.jumboh1 {
+  color: green;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.jumboh3 {
+  color: green;
+  font-weight: bold;
+}
