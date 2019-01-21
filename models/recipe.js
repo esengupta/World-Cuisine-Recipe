@@ -14,7 +14,8 @@ const recipeSchema = new Schema({
     type: Array
   },
   uri: {
-    type: String
+    type: String,
+    required: true
   },
   url: {
     type: String

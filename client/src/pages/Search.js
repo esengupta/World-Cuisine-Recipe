@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Pagination from "react-js-pagination";
 
 import API from "../utils/API"
 // import SearchForm from "../components/SearchForm";
@@ -10,13 +11,18 @@ import Filters from './data/filters'
 class Search extends Component {
   state = {
     searchTerm: "",
-    recipes: []
+    recipes: [],
+    displayPage: [],
+    activePage: 1
   };
 
   componentWillMount = () => {
     this.dietCheckboxes = new Set();
     this.healthCheckboxes = new Set();
   }
+  // componentDidMount() {
+  //   this.loadFavorites();
+  // };
 
   toggleDietCheckbox = label => {
     if (this.dietCheckboxes.has(label)) {
@@ -84,11 +90,14 @@ class Search extends Component {
       .searchRecipes(this.state.searchTerm, diet, health)
       .then(({ data }) => {
         console.log(data);
-        this.setState({ recipes: data.hits })
+        this.setState({ recipes: data.hits });
+        this.handlePageChange(1);
       })
       .catch(err => {
         console.log(err)
-        this.setState({ recipes: [] })
+        this.setState({ recipes: [] });
+        this.setState({ displayPage: [] });
+        this.setState({ activePage: 1 });
       });
   }
 
@@ -97,14 +106,14 @@ class Search extends Component {
     let saveRecipe = {};
     this.state.recipes.forEach(item => {
       if (item.recipe.uri === uri) {
-        saveRecipe.username='Bruce';
-        saveRecipe.title=item.recipe.label;
-        saveRecipe.ingredients=item.recipe.ingredientLines;
-        saveRecipe.uri=item.recipe.uri.substring(item.recipe.uri.indexOf("#")+1);
-        saveRecipe.url=item.recipe.url;
-        saveRecipe.image=item.recipe.image;
-        saveRecipe.dietLabels=item.recipe.dietLabels;
-        saveRecipe.healthLabels=item.recipe.healthLabels;
+        saveRecipe.username = 'Bruce';
+        saveRecipe.title = item.recipe.label;
+        saveRecipe.ingredients = item.recipe.ingredientLines;
+        saveRecipe.uri = item.recipe.uri.substring(item.recipe.uri.indexOf("#") + 1);
+        saveRecipe.url = item.recipe.url;
+        saveRecipe.image = item.recipe.image;
+        saveRecipe.dietLabels = item.recipe.dietLabels;
+        saveRecipe.healthLabels = item.recipe.healthLabels;
       }
     });
     console.log(saveRecipe);
@@ -116,6 +125,16 @@ class Search extends Component {
       .catch(err => {
         console.log(err)
       });
+  }
+
+  handlePageChange = pageNumber => {
+    console.log(`active page is ${pageNumber}`)
+    let newArr = [];
+    for (let i = (pageNumber - 1) * 10; i < pageNumber * 10; i++) {
+      newArr.push(this.state.recipes[i]);
+    }
+    this.setState({ displayPage: newArr });
+    this.setState({ activePage: pageNumber });
   }
 
   render() {
@@ -143,6 +162,7 @@ class Search extends Component {
                 >
                   Search
                 </button>
+                <hr />
                 <h6>Diet Labels</h6>
                 {this.createDietCheckboxes()}
                 <h6>Health Labels</h6>
@@ -150,21 +170,35 @@ class Search extends Component {
               </form>
             </div>
             <div className="col-9">
-              {this.state.recipes.length ? (
-                <div className="row align-items-stretch">
-                  {this.state.recipes.map(recipe => (
-                    <Card
-                      key={recipe.recipe.uri}
-                      uri={recipe.recipe.uri}
-                      title={recipe.recipe.label}
-                      url={recipe.recipe.url}
-                      ingredients={recipe.recipe.ingredientLines.join(", ")}
-                      picture={recipe.recipe.image}
-                      dietLabels={recipe.recipe.dietLabels.join(", ")}
-                      healthLabels={recipe.recipe.healthLabels.join(", ")}
-                      handleSave={this.handleSave}
+              {this.state.displayPage.length ? (
+                <div>
+                  <div className="row align-items-stretch">
+                    {this.state.displayPage.map(recipe => (
+                      <Card
+                        key={recipe.recipe.uri}
+                        uri={recipe.recipe.uri}
+                        title={recipe.recipe.label}
+                        url={recipe.recipe.url}
+                        ingredients={recipe.recipe.ingredientLines.join(", ")}
+                        picture={recipe.recipe.image}
+                        dietLabels={recipe.recipe.dietLabels.join(", ")}
+                        healthLabels={recipe.recipe.healthLabels.join(", ")}
+                        handleSave={this.handleSave}
+                      />
+                    ))}
+                  </div>
+                  <div className='mx-auto'>
+                    <Pagination
+                      hideDisabled
+                      activePage={this.state.activePage}
+                      itemsCountPerPage={10}
+                      totalItemsCount={100}
+                      pageRangeDisplayed={5}
+                      onChange={this.handlePageChange}
+                      linkClass={'page-link'}
+                      activeClass={'active'}
                     />
-                  ))}
+                  </div>
                 </div>
               ) : (
                   <h3 className="text-center">No Recipes found.</h3>

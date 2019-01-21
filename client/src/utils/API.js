@@ -6,7 +6,7 @@ export default {
     const appID = "43f51de6";
     const appKey = "dfe2f7767832a208576c7e3597b7a3aa";
 
-    const maxRec = 21;
+    const maxRec = 100;
 
       let urlquery = `https://api.edamam.com/search?q=${search}&app_id=${appID}&app_key=${appKey}&to=${maxRec}`;
       diet.forEach(element => {
