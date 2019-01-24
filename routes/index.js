@@ -15,7 +15,7 @@ router.use('/auth', authRoutes);
 
 // if no routes are hit, send the client's homepage (only to be used in production)
 router.get(function(req,res) {
-  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 module.exports = router;

@@ -14,13 +14,21 @@ const Card = (props) => {
       }
       <div className="card-body">
         <h5 className="card-title">{props.title}</h5>
-        <p className="card-text">{props.ingredients}</p>
-        <p className="card-text">{props.dietLabels}</p>
-        <p className="card-text">{props.healthLabels}</p>
+        <p className="card-text"><strong>Ingredients:</strong> {props.ingredients}</p>
+        <p className="card-text"><strong>Diet Labels:</strong> {props.dietLabels}</p>
+        <p className="card-text"><strong>Health Labels:</strong> {props.healthLabels}</p>
       </div>
       <div className="card-footer">
         <a href={props.url} className="btn btn-primary btn-sm mr-3">View Recipe</a>
-        <a href='#' className="btn btn-primary btn-sm">Favorite</a>
+        {props.handleSave ?
+          (
+            <button className="btn btn-primary btn-sm" onClick={() => props.handleSave(props.uri)}>Save</button>
+          )
+          :
+          (
+            <button className="btn btn-primary btn-sm" onClick={() => props.handleDelete(props.uri)}>Remove</button>
+          )
+        }
       </div>
     </div>)
 }

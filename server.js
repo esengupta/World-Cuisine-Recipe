@@ -2,7 +2,7 @@ var dotenv = require('dotenv');
 dotenv.config();
 
 const express = require("express");
-const morgan = require("morgan");
+// const morgan = require("morgan");
 const mongoose = require("mongoose");
 // const mongoose = require("mongoose");
 const cors = require("cors");
@@ -19,7 +19,7 @@ var Auth0Strategy = require('passport-auth0');
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(morgan('dev'));
+// app.use(morgan('dev'));
 
 // config express-session
 var sess = {
@@ -66,11 +66,11 @@ passport.deserializeUser(function (user, done) {
 passport.use(strategy);
 app.use(passport.initialize());
 app.use(passport.session());
-app.use('/', routes);
+app.use(routes);
 
 
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recipelist");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/recipelist", {useNewUrlParser: true});
 
 // Start the API server
 app.listen(PORT, function() {

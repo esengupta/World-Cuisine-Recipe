@@ -25,6 +25,7 @@ class Checkbox extends Component {
       <div className="checkbox ml-3">
         <label>
           <input
+            className="mr-1"
             type="checkbox"
             value={label}
             checked={isChecked}

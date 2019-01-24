@@ -6,7 +6,7 @@ const recipesController = require("../../controllers/recipesController");
 router
   .route("/")
   .get(recipesController.findAll)
-  // .post(recipesController.create);
+  .post(recipesController.create);
 
 router
   .route("/:id")
