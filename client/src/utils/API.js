@@ -3,20 +3,18 @@ import axios from 'axios';
 export default {
 
   searchRecipes: function (search, diet, health) {
-    const appID = "43f51de6";
-    const appKey = "dfe2f7767832a208576c7e3597b7a3aa";
 
-    const maxRec = 100;
-
-      let urlquery = `https://api.edamam.com/search?q=${search}&app_id=${appID}&app_key=${appKey}&to=${maxRec}`;
+      let urlquery = `q=${search}`  //&to=${maxRec}`;
+      // let urlquery = `https://api.edamam.com/search?q=${search}&app_id=${appID}&app_key=${appKey}&to=${maxRec}`;
       diet.forEach(element => {
         urlquery += `&diet=${element}`;
       });
       health.forEach(element => {
         urlquery += `&health=${element}`;
       });
-
-      return axios.get(urlquery);
+      // console.log('call edamam api');
+      // console.log(urlquery);
+      return axios.get(`/api/apirecipes/${urlquery}`);
   },
 
   saveRecipe: function(recipeData) {

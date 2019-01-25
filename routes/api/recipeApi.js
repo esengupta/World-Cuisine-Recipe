@@ -1,22 +1,29 @@
 // import express Router and the recipe controller
 const router = require("express").Router();
 const axios = require("axios");
+const keys = require("../../keys");
 
-// Matches with "/api/recipes"
+const appID = keys.edamam.id;
+const appKey = keys.edamam.key;
+
+// Matches with "/api/recipeApi"
 router
-  // .route("/")
-// .post(recipesController.create);
-  .get("/", (req,res) => {
-    console.log('this is called too');
-  
-  // .route("/:id")
-  // console.log(`http://www.recipepuppy.com/api/?i=${req.query.ingredient}`)
-axios
-  .get(`http://www.recipepuppy.com/api/?i=${req.query.ingredient}`) //, {params: req.query})
-  .then((results) => res.json(results.data.results))
-  .catch(err => 
-        // console.log(err);
-        res.status(422).json(err));
+  .get("/:query", function (req, res) {
+    // console.log('this is called too');
+    // console.log(req.params.query);
+    const url = `https://api.edamam.com/search?${req.params.query}&app_id=${appID}&app_key=${appKey}&to=100`;
+    // console.log(url);
+
+    axios
+      .get(url)
+      .then(function(results) {
+        // console.log(results.data)
+        res.json(results.data)
+      })
+      .catch(function (err) {
+        console.log(err);
+        res.status(422).json(err)
+      });
 
   });
 
