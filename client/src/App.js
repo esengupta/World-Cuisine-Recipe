@@ -9,7 +9,7 @@ import Auth from './utils/Auth/Auth';
 
 class App extends Component {
   constructor(props) {
-    super();
+    super(props);
     // Auth0 instance
     this.auth = new Auth();
   }
@@ -20,7 +20,7 @@ class App extends Component {
       this.auth.getProfile((data)=> {console.log(data)})
     }
 
-    this.setState({loggedIn: this.auth.isAuthenticated()})
+    // this.setState({loggedIn: this.auth.isAuthenticated()})
   }
 
   render() {
@@ -30,10 +30,7 @@ class App extends Component {
           <Navbar auth={this.auth}/>
           <Switch>
             <Route exact path="/" component={ (props) => {return <Search auth={this.auth} />} }/>
-            <Route exact path="/favorites" component={Favorites} />
-            {/* <Route path="/callback" render={(props) => {
-              this.auth.handleAuthentication();
-            }}/> */}
+            <Route exact path="/favorites" component={(props) => {return <Favorites auth={this.auth}/>}} />
             <Route
               render={() => <h1 className="text-center">Sorry, the page you requested does not exist.
               </h1>} />

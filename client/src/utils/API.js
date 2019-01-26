@@ -1,4 +1,7 @@
 import axios from 'axios';
+import Auth from './Auth/Auth';
+
+let auth = new Auth();
 
 export default {
 
@@ -38,7 +41,6 @@ export default {
 
   getFavorites: function(username) {
     console.log('getFavorites');
-    console.log(username);
     return axios.get(`/api/recipe/user/${username}`)
   },
 

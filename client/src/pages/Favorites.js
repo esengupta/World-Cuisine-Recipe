@@ -13,15 +13,21 @@ class Favorites extends Component {
     user: "Bruce"
   };
 
+  constructor(props){
+    super(props)
+  }
   componentDidMount() {
-    this.loadFavorites();
+    this.props.auth.getProfile((profile) => {
+      this.setState({
+        user: profile.email
+      })
+      this.loadFavorites();
+    })
   };
 
   loadFavorites = () => {
-    console.log('user is');
-    console.log(this.state.user);
-    API
-      .getFavorites(this.state.user)
+    console.log('user is' + this.state.user);
+    API.getFavorites(this.state.user)
       .then(({ data }) => {
         console.log('returned data');
         console.log(data);
@@ -76,10 +82,6 @@ class Favorites extends Component {
   render() {
     return (
       <div>
-        <Navbar
-          handleLogin=""
-          username="Bruce"
-        />
         <Jumbotron
           pagename="Recipe Favorites Page"
           description="The recipes that are your favoriates"
