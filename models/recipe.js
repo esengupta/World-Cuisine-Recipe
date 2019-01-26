@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const recipeSchema = new Schema({
   username: {
     type: String,
-    required: true
+    required: true,
+    unique: false
   },
   title: {
     type: String,
@@ -15,7 +16,8 @@ const recipeSchema = new Schema({
   },
   uri: {
     type: String,
-    required: true
+    required: true,
+    unique: false
   },
   url: {
     type: String
@@ -34,6 +36,8 @@ const recipeSchema = new Schema({
     default: Date.now
   }
 });
+
+recipeSchema.index({ username: 1, uri: 1 }, { unique: true });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);
 

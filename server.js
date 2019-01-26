@@ -50,8 +50,7 @@ var strategy = new Auth0Strategy(
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   sess.cookie.secure = true; // serve secure cookies, requires https
-}
-
+} 
 app.use(session(sess));
 app.use(cors());
 

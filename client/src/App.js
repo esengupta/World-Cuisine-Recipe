@@ -35,7 +35,7 @@ class App extends Component {
               this.auth.handleAuthentication();
             }}/> */}
             <Route
-              render={() => <h1 className="text-center">Where are you?
+              render={() => <h1 className="text-center">Sorry, the page you requested does not exist.
               </h1>} />
           </Switch>
         </div>
