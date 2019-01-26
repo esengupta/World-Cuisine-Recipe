@@ -14,8 +14,7 @@ export default {
 
   searchRecipes: function (search, diet, health) {
 
-      let urlquery = `q=${search}`  //&to=${maxRec}`;
-      // let urlquery = `https://api.edamam.com/search?q=${search}&app_id=${appID}&app_key=${appKey}&to=${maxRec}`;
+      let urlquery = `q=${search}`;
       diet.forEach(element => {
         urlquery += `&diet=${element}`;
       });
@@ -31,16 +30,28 @@ export default {
     return axios.post('/api/recipe', recipeData)
   },
 
-  getFavorites: function(user) {
-    console.log('getFavorites');
-    console.log(user);
-    return axios.get(`/api/recipe?username=${user}`)
+  deleteRecipe: function(uri, username) {
+    console.log('deleteRecipe');
+    console.log(uri, username);
+    return axios.delete(`/api/recipe/user/${username}/uri/${uri}`)
   },
 
-  deleteRecipe: function(uri) {
-    console.log('deleteRecipe');
-    console.log(uri);
-    return axios.delete(`/api/recipe/${uri}`)
+  getFavorites: function(username) {
+    console.log('getFavorites');
+    console.log(username);
+    return axios.get(`/api/recipe/user/${username}`)
   },
+
+  searchFavorites: function(username, query) {
+    console.log('serachFavorites');
+    console.log(username, query);
+    return axios.get(`/api/recipe/user/${username}/query/${query}`)
+  },
+
+  login: function() {
+    console.log('login');
+    return axios.get(`/auth/user`)
+  },
+
 
 }

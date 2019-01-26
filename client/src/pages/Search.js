@@ -7,6 +7,7 @@ import Card from "../components/Card";
 import Jumbotron from "../components/Jumbotron";
 import Checkbox from '../components/Checkbox';
 import Filters from './data/filters'
+import Navbar from "../components/Navbar";
 
 class Search extends Component {
   
@@ -18,6 +19,18 @@ class Search extends Component {
         displayPage: [],
         activePage: 1
       };
+  }
+
+  login = uri => {
+    console.log("login");
+    API
+      .login()
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   componentWillMount = () => {
@@ -144,6 +157,9 @@ class Search extends Component {
   render() {
     return (
       <div>
+        <Navbar
+          handleLogin={this.login}
+        />
         <Jumbotron
           pagename="Recipe Search Page"
           description="Search for recipes by ingredients"

@@ -9,6 +9,7 @@ const secured = ('../../middleware/secured');
 // prefix book route endpoint with "/book"
 //Routes
 router.get('/user', function(req, res){
+  console.log('login as user');
   if (req.user){
     res.json(req.user);
   } else {res.redirect('http://localhost:3001/auth/login')}
@@ -23,9 +24,10 @@ router.get('/login', passport.authenticate('auth0', {
 //  userController.auth,passport.authenticate('local'),userController.authenticate);
 router.get('/logout', (req, res) => {
   req.logOut();
-  passport.deserializeUser(req.user, function(){
-    res.redirect('http://localhost:3000')//'/');
-  })
+  res.redirect('http://localhost:3000/')//'/');
+  // passport.deserializeUser(req.user, function(){
+  //   res.redirect('http://localhost:3000')//'/');
+  // })
 });
 
 router.get('/callback', function (req, res, next) {
