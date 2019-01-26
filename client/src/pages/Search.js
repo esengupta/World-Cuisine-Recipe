@@ -9,12 +9,16 @@ import Checkbox from '../components/Checkbox';
 import Filters from './data/filters'
 
 class Search extends Component {
-  state = {
-    searchTerm: "",
-    recipes: [],
-    displayPage: [],
-    activePage: 1
-  };
+  
+  constructor(props){
+    super(props);
+      this.state = {
+        searchTerm: "",
+        recipes: [],
+        displayPage: [],
+        activePage: 1
+      };
+  }
 
   componentWillMount = () => {
     this.dietCheckboxes = new Set();
@@ -184,6 +188,7 @@ class Search extends Component {
                         dietLabels={recipe.recipe.dietLabels.join(", ")}
                         healthLabels={recipe.recipe.healthLabels.join(", ")}
                         handleSave={this.handleSave}
+                        isLoggedIn={this.props.auth.isAuthenticated()}
                       />
                     ))}
                   </div>

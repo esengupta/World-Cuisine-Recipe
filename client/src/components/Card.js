@@ -20,9 +20,10 @@ const Card = (props) => {
       </div>
       <div className="card-footer">
         <a href={props.url} className="btn btn-primary btn-sm mr-3">View Recipe</a>
+        
         {props.handleSave ?
           (
-            <button className="btn btn-primary btn-sm" onClick={() => props.handleSave(props.uri)}>Save</button>
+            props.isLoggedIn ?  <button className="btn btn-primary btn-sm" onClick={() => props.handleSave(props.uri)}>Save</button> : ''
           )
           :
           (
