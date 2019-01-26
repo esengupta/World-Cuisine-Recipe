@@ -3,12 +3,13 @@ body {
 }
 
 .jumbotron {
-  background-image: url("../images/recipe-book.jpg");
+  background-image: url("../images/beans.jpg");
   background-size: cover;
+  height: 900%;
 }
 
 .jumboh1 {
-  color: green;
+  color: red;
   font-size: 50px;
   font-weight: bold;
 }
