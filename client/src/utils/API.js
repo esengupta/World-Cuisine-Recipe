@@ -2,6 +2,16 @@ import axios from 'axios';
 
 export default {
 
+  login: function() {
+    axios.get('/auth/login')
+    // .then(res=> {
+    //   console.log('1212')
+    //   console.log(res);
+    // })
+    // .catch(err => console.log(err));
+    
+  },
+
   searchRecipes: function (search, diet, health) {
 
       let urlquery = `q=${search}`  //&to=${maxRec}`;
