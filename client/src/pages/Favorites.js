@@ -1,26 +1,33 @@
 import React, { Component } from "react";
-// import Navbar from "../components/Navbar"
 
 import API from "../utils/API"
 import Card from "../components/Card";
-// import SearchForm from "../components/SearchForm";
+import SearchForm from "../components/SearchForm";
 import Jumbotron from "../components/Jumbotron";
+import Navbar from "../components/Navbar";
 
 class Favorites extends Component {
   state = {
-    recipes: []
+    searchTerm: "",
+    recipes: [],
+    user: "Bruce"
   };
 
+  constructor(props){
+    super(props)
+  }
   componentDidMount() {
-    this.loadFavorites();
+    this.props.auth.getProfile((profile) => {
+      this.setState({
+        user: profile.email
+      })
+      this.loadFavorites();
+    })
   };
 
   loadFavorites = () => {
-    const user = 'Bruce';
-    console.log('user is');
-    console.log(user);
-    API
-      .getFavorites(user)
+    console.log('user is' + this.state.user);
+    API.getFavorites(this.state.user)
       .then(({ data }) => {
         console.log('returned data');
         console.log(data);
@@ -30,13 +37,13 @@ class Favorites extends Component {
         console.log(err)
         this.setState({ recipes: [] })
       });
-  }
+  };
 
   handleDelete = uri => {
     console.log("delete Fave");
-    console.log(uri);
+    console.log(uri,this.state.user);
     API
-      .deleteRecipe(uri)
+      .deleteRecipe(uri, this.state.user)
       .then(({ data }) => {
         console.log(data);
         this.loadFavorites();
@@ -44,7 +51,33 @@ class Favorites extends Component {
       .catch(err => {
         console.log(err)
       });
-  }
+  };
+
+  handleChange = event => {
+    const { name, value } = event.target;
+
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+
+    if (!this.state.searchTerm) {
+      return this.loadFavorites();
+    }
+
+    API
+      .searchFavorites(this.state.user, this.state.searchTerm)
+      .then(({ data }) => {
+        console.log('returned data');
+        console.log(data);
+        this.setState({ recipes: data })
+      })
+      .catch(err => {
+        console.log(err)
+        this.setState({ recipes: [] })
+      });
+  };
 
   render() {
     return (
@@ -52,6 +85,11 @@ class Favorites extends Component {
         <Jumbotron
           pagename="Recipe Favorites Page"
           description="The recipes that are your favoriates"
+        />
+        <SearchForm
+          onSubmit={this.handleSubmit}
+          onChange={this.handleChange}
+          onClick={this.handleSubmit}
         />
         <div className="container-fluid">
           <div className="col-12">

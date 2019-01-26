@@ -7,6 +7,7 @@ import Card from "../components/Card";
 import Jumbotron from "../components/Jumbotron";
 import Checkbox from '../components/Checkbox';
 import Filters from './data/filters'
+import Navbar from "../components/Navbar";
 
 class Search extends Component {
   
@@ -18,6 +19,18 @@ class Search extends Component {
         displayPage: [],
         activePage: 1
       };
+  }
+
+  login = uri => {
+    console.log("login");
+    API
+      .login()
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err)
+      });
   }
 
   componentWillMount = () => {
@@ -108,27 +121,29 @@ class Search extends Component {
   handleSave = uri => {
     console.log("save Fave");
     let saveRecipe = {};
-    this.state.recipes.forEach(item => {
-      if (item.recipe.uri === uri) {
-        saveRecipe.username = 'Bruce';
-        saveRecipe.title = item.recipe.label;
-        saveRecipe.ingredients = item.recipe.ingredientLines;
-        saveRecipe.uri = item.recipe.uri.substring(item.recipe.uri.indexOf("#") + 1);
-        saveRecipe.url = item.recipe.url;
-        saveRecipe.image = item.recipe.image;
-        saveRecipe.dietLabels = item.recipe.dietLabels;
-        saveRecipe.healthLabels = item.recipe.healthLabels;
-      }
-    });
-    console.log(saveRecipe);
-    API
-      .saveRecipe(saveRecipe)
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch(err => {
-        console.log(err)
+    this.props.auth.getProfile((data) => {
+      this.state.recipes.forEach(item => {
+        if (item.recipe.uri === uri) {
+          saveRecipe.username = data.email;
+          saveRecipe.title = item.recipe.label;
+          saveRecipe.ingredients = item.recipe.ingredientLines;
+          saveRecipe.uri = item.recipe.uri.substring(item.recipe.uri.indexOf("#") + 1);
+          saveRecipe.url = item.recipe.url;
+          saveRecipe.image = item.recipe.image;
+          saveRecipe.dietLabels = item.recipe.dietLabels;
+          saveRecipe.healthLabels = item.recipe.healthLabels;
+        }
       });
+      console.log(saveRecipe);
+      API
+        .saveRecipe(saveRecipe)
+        .then(({ data }) => {
+          console.log(data);
+        })
+        .catch(err => {
+          console.log(err)
+        });
+    })
   }
 
   handlePageChange = pageNumber => {

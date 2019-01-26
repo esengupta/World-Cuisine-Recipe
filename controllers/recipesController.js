@@ -9,17 +9,30 @@ module.exports = {
     // /api/book?title=harry+potter
     // req.query => {title: "harry potter"}
     console.log('db.findall');
-    console.log(req.query.username);
+    console.log(req.query);
     db.Recipe
       .find({ username: req.query.username })
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
-
   },
 
+    // find a favorite recipe by username ("/api/recipes/:username")
+    findSearch: function (req, res) {
+      console.log('db.findByUser');
+      console.log(req);
+      db.Recipe
+        .find(req.params.id)
+        .then(dbModel => res.json(dbModel))
+        .catch(err =>
+          // console.log(err);
+          res.status(422).json(err)
+        );
+    },
+  
   // find a book by id ("/api/book/:id")
   findById: function (req, res) {
+    console.log('db.findById');
     db.Recipe
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))

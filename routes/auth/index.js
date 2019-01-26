@@ -31,6 +31,7 @@ const checkJwt = jwt({
 
 //Routes
 router.get('/user', function(req, res){
+  console.log('login as user');
   if (req.user){
     res.json(req.user);
   } else {res.redirect('http://localhost:3001/auth/login')}
