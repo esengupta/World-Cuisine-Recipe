@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, NavLink} from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = props => {
   return (
@@ -18,11 +18,16 @@ const Navbar = props => {
           </NavLink>
         </li>
         <li className="nav-item">
-          <NavLink
-            className={`nav-link text-info ${window.location.pathname === "/favorites" ? "text-danger" : ""}`}
-            to="/favorites">
-            View Favorite Recipes
+          {props.auth.isAuthenticated() ? (
+            <NavLink
+              className={`nav-link text-info ${window.location.pathname === "/favorites" ? "text-danger" : ""}`}
+              to="/favorites">
+              View Favorite Recipes
           </NavLink>
+          ) : (
+              <div />
+            )
+          }
         </li>
         <li className="nav-item">
           <NavLink
@@ -31,7 +36,7 @@ const Navbar = props => {
             onClick={
               props.auth.isAuthenticated() ? () => props.auth.logout() : () => props.auth.login()
             }
-            >
+          >
             {
               props.auth.isAuthenticated() ? 'logout' : 'login'}
           </NavLink>
