@@ -2,23 +2,22 @@ import React, { Component } from "react";
 import Pagination from "react-js-pagination";
 
 import API from "../utils/API"
-// import SearchForm from "../components/SearchForm";
 import Card from "../components/Card";
 import Jumbotron from "../components/Jumbotron";
 import Checkbox from '../components/Checkbox';
 import Filters from './data/filters'
-import Navbar from "../components/Navbar";
 
 class Search extends Component {
-  
-  constructor(props){
+
+  constructor(props) {
     super(props);
-      this.state = {
-        searchTerm: "",
-        recipes: [],
-        displayPage: [],
-        activePage: 1
-      };
+    this.state = {
+      searchTerm: "",
+      recipes: [],
+      displayPage: [],
+      activePage: 1,
+      status: "Start Search"
+    };
   }
 
   login = uri => {
@@ -91,14 +90,15 @@ class Search extends Component {
     if (!this.state.searchTerm) {
       return false;
     }
+    this.setState({ status: "Loading..." });
 
     let diet = [];
     let health = [];
     for (const dietcheck of this.dietCheckboxes) {
-      diet.push(dietcheck);
+      diet.push(dietcheck.toLowerCase());
     }
     for (const healthcheck of this.healthCheckboxes) {
-      health.push(healthcheck);
+      health.push(healthcheck.toLowerCase());
     }
     console.log(diet);
     console.log(health);
@@ -150,10 +150,13 @@ class Search extends Component {
     console.log(`active page is ${pageNumber}`)
     let newArr = [];
     for (let i = (pageNumber - 1) * 10; i < pageNumber * 10; i++) {
-      newArr.push(this.state.recipes[i]);
+      if (i < this.state.recipes.length) {
+        newArr.push(this.state.recipes[i]);
+      }
     }
-    this.setState({ displayPage: newArr });
     this.setState({ activePage: pageNumber });
+    this.setState({ displayPage: newArr });
+    this.setState({ status: "No Records Found." });
   }
 
   render() {
@@ -165,7 +168,7 @@ class Search extends Component {
         />
         <div className="container-fluid">
           <div className="row">
-            <div className="col-3">
+            <div className="col-4 col-md-3 col-lg-2">
               <form onSubmit={this.handleSubmit}>
                 <input
                   placeholder="Search by ingredients"
@@ -188,7 +191,7 @@ class Search extends Component {
                 {this.createHealthCheckboxes()}
               </form>
             </div>
-            <div className="col-9">
+            <div className="col-8 col-md-9 col-lg-10">
               {this.state.displayPage.length ? (
                 <div>
                   <div className="row align-items-stretch">
@@ -212,16 +215,17 @@ class Search extends Component {
                       hideDisabled
                       activePage={this.state.activePage}
                       itemsCountPerPage={10}
-                      totalItemsCount={100}
+                      totalItemsCount={this.state.displayPage.length}
                       pageRangeDisplayed={5}
                       onChange={this.handlePageChange}
                       linkClass={'page-link'}
+                      itemClass={'page-item'}
                       activeClass={'active'}
                     />
                   </div>
                 </div>
               ) : (
-                  <h3 className="text-center">No Recipes found.</h3>
+                  <h3 className="text-center">{this.state.status}</h3>
                 )}
             </div>
           </div>

@@ -5,16 +5,6 @@ let auth = new Auth();
 
 export default {
 
-  login: function() {
-    axios.get('/auth/login')
-    // .then(res=> {
-    //   console.log('1212')
-    //   console.log(res);
-    // })
-    // .catch(err => console.log(err));
-    
-  },
-
   searchRecipes: function (search, diet, health) {
 
       let urlquery = `q=${search}`;
@@ -49,11 +39,5 @@ export default {
     console.log(username, query);
     return axios.get(`/api/recipe/user/${username}/query/${query}`)
   },
-
-  login: function() {
-    console.log('login');
-    return axios.get(`/auth/user`)
-  },
-
 
 }

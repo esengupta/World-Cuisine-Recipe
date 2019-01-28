@@ -1,20 +1,20 @@
 const FILTERS = {
   diet: [
-    'balance',
-    'high-fiber',
-    'high-protein',
-    'low-carb',
-    'low-fat',
-    'low-sodium'
+    'Balance',
+    'High-Fiber',
+    'High-Protein',
+    'Low-Carb',
+    'Low-Fat',
+    'Low-Sodium'
   ],
   
   health: [
-    'alcohol-free',
-    'peanut-free',
-    'sugar-conscious',
-    'tree-nut-free',
-    'vegan',
-    'vegetarian'
+    'Alcohol-Free',
+    'Peanut-Free',
+    'Sugar-Conscious',
+    'Tree-Nut-Free',
+    'Vegan',
+    'Vegetarian'
   ],
 
   healthfull: [
