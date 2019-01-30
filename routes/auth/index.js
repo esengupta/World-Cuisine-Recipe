@@ -12,7 +12,10 @@ router.get('/user', function(req, res){
   console.log('login as user');
   if (req.user){
     res.json(req.user);
-  } else {res.redirect('http://localhost:3001/auth/login')}
+  } else {
+    // res.redirect('http://localhost:3001/auth/login')
+    res.redirect('https://worldcuisinerecipe.herokuapp.com/auth/login')
+  }
 });
 // Perform the login, after login Auth0 will redirect to callback
 router.get('/login', passport.authenticate('auth0', {
@@ -24,7 +27,8 @@ router.get('/login', passport.authenticate('auth0', {
 //  userController.auth,passport.authenticate('local'),userController.authenticate);
 router.get('/logout', (req, res) => {
   req.logOut();
-  res.redirect('http://localhost:3000/')//'/');
+  // res.redirect('http://localhost:3000/')//'/');
+  res.redirect('https://worldcuisinerecipe.herokuapp.com/')//'/');
   // passport.deserializeUser(req.user, function(){
   //   res.redirect('http://localhost:3000')//'/');
   // })
