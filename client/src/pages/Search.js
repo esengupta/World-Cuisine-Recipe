@@ -16,7 +16,8 @@ class Search extends Component {
       recipes: [],
       displayPage: [],
       activePage: 1,
-      status: "Start Search"
+      status: "Start Search",
+      savedArray: []
     };
   }
 
@@ -120,6 +121,10 @@ class Search extends Component {
 
   handleSave = uri => {
     console.log("save Fave");
+    let tempArr = this.state.savedArray;
+    tempArr.push(uri);
+    this.setState({ savedArray: tempArr });
+
     let saveRecipe = {};
     this.props.auth.getProfile((data) => {
       this.state.recipes.forEach(item => {
@@ -207,6 +212,7 @@ class Search extends Component {
                         healthLabels={recipe.recipe.healthLabels.join(", ")}
                         handleSave={this.handleSave}
                         isLoggedIn={this.props.auth.isAuthenticated()}
+                        saveColor={this.state.savedArray.indexOf(recipe.recipe.uri) === -1 ? 'btn-primary' : 'btn-success'}
                       />
                     ))}
                   </div>

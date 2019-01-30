@@ -17,12 +17,12 @@ router
     axios
       .get(url)
       .then(function(results) {
-        // console.log(results.data)
-        res.json(results.data)
+        // console.log(results.data);
+        res.json(results.data);
       })
       .catch(function (err) {
         console.log(err);
-        res.status(422).json(err)
+        res.status(422).json(err);
       });
 
   });
