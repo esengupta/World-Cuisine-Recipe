@@ -23,7 +23,7 @@ const Card = (props) => {
         
         {props.handleSave ?
           (
-            props.isLoggedIn ?  <button className="btn btn-primary btn-sm" onClick={() => props.handleSave(props.uri)}>Save</button> : ''
+            props.isLoggedIn ?  <button className={`btn ${props.saveColor} btn-sm`} onClick={() => props.handleSave(props.uri)}>Save</button> : ''
           )
           :
           (
