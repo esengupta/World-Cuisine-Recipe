@@ -4,6 +4,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'esengpta.auth0.com',
     clientID: 'Apb7iVrs0T3bTnOmWeKpHUbaaiRm7DS0',
+    // redirectUri: 'http://localhost:3001/',
     redirectUri: 'https://worldcuisinerecipe.herokuapp.com/',
     responseType: 'token id_token',
     scope: 'openid profile email'

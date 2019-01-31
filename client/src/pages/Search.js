@@ -197,7 +197,7 @@ class Search extends Component {
               </form>
             </div>
             <div className="col-8 col-md-9 col-lg-10">
-              {this.state.displayPage.length ? (
+              {this.state.recipes.length ? (
                 <div>
                   <div className="row align-items-stretch">
                     {this.state.displayPage.map(recipe => (
@@ -221,7 +221,7 @@ class Search extends Component {
                       hideDisabled
                       activePage={this.state.activePage}
                       itemsCountPerPage={10}
-                      totalItemsCount={this.state.displayPage.length}
+                      totalItemsCount={this.state.recipes.length}
                       pageRangeDisplayed={5}
                       onChange={this.handlePageChange}
                       linkClass={'page-link'}
