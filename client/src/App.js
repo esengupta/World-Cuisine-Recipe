@@ -17,7 +17,9 @@ class App extends Component {
     if (window.location.href.includes('access_token')){
       this.auth.handleAuthentication()
     } else if (this.auth.isAuthenticated()) {
-      this.auth.getProfile((data)=> {console.log(data)})
+      this.auth.getProfile((data)=> {
+        console.log(data);
+      })
     }
 
     // this.setState({loggedIn: this.auth.isAuthenticated()})
@@ -27,7 +29,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Navbar auth={this.auth}/>
+          <Navbar auth={this.auth} />
           <Switch>
             <Route exact path="/" component={ (props) => {return <Search auth={this.auth} />} }/>
             <Route exact path="/favorites" component={(props) => {return <Favorites auth={this.auth}/>}} />
